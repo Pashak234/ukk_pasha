@@ -1,0 +1,10 @@
+/* CSS untuk memberikan tinggi minimum pada konten utama */
+main {
+    min-height: calc(75vh); /* Sesuaikan dengan tinggi navbar dan footer Anda */
+    /* 100vh adalah tinggi viewport, dan 180px adalah total tinggi navbar dan footer */
+}
+
+/* CSS untuk footer */
+footer {
+
+}

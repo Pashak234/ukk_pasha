@@ -1,0 +1,20 @@
+/* .shades{
+    color: #f8f9fa;
+} */
+.card-text-home{
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Menetapkan jumlah baris yang diinginkan */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Menampilkan titik-titik setelah dua baris */
+}
+.card-text-main{
+display: -webkit-box;
+-webkit-line-clamp: 2; /* Menetapkan jumlah baris yang diinginkan */
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis; /* Menampilkan titik-titik setelah dua baris */
+}
+.bg-gray{
+background-color: gray;
+}

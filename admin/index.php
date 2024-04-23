@@ -325,6 +325,23 @@ if (!isset($_SESSION['login']) || ($_SESSION['login'] != 'admin' && $_SESSION['l
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#searchInputUser').keyup(function() {
+                var query = $(this).val();
+                $.ajax({
+                    url: 'searches/searchuser.php',
+                    method: 'POST',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+                        $('#userTable').html(response);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

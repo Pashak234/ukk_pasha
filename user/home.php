@@ -24,7 +24,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
         <div class="gallery mt-2">
             <hr>
             <p class="fs-3 text-center">Our Collection</p>
-            <div class="row justify-content-center" id="siswaTable">
+            <div class="row justify-content-center" id="bookTable">
                 <?php
                 // Declaration of Pagination
                 $limit = 8;

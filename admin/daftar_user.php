@@ -17,9 +17,18 @@ $next = $halaman + 1;
             </h3>
         </div>
         <div class="card-body">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                Tambahkan Pengguna
-            </button>
+            <div class="d-flex justify-content-between m-3">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    Tambahkan Pengguna
+                </button>
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" id="searchInputUser">
+                        <div class="input-group-append">
+                        </div>
+                    </div>
+                </form>
+            </div>
             <!-- Modal for adding data -->
             <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addModalUser" aria-hidden="true">
                 <div class="modal-dialog">
@@ -41,8 +50,7 @@ $next = $halaman + 1;
                                 <label class="form-label" for="">Adresss</label>
                                 <input type="text" name="alamat" id="" class="form-control" required>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary" name="kirim">Simpan</button>
                                 </div>
                             </form>
@@ -54,12 +62,10 @@ $next = $halaman + 1;
                 <thead>
                     <th>No.</th>
                     <th>Username</th>
-                    <th>Email</th>
                     <th>Nama Lengkap</th>
-                    <th>Alamat</th>
                     <th>Action</th>
                 </thead>
-                <tbody>
+                <tbody id="userTable">
                     <tr>
                         <?php
                         include '../config/koneksi.php';
@@ -73,66 +79,50 @@ $next = $halaman + 1;
                                 </td>
                                 <td>
                                     <a href="index.php?page=detail&&id=<?php echo $data['UserID'] ?>">
-                                    <?php echo $data['Username']; ?>
-                                </a>
-                                </td>
-                                <td>
-                                    <?php echo $data['Email']; ?>
+                                        <?php echo $data['Username']; ?>
+                                    </a>
                                 </td>
                                 <td>
                                     <?php echo $data['NamaLengkap']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $data['Alamat']; ?>
-                                </td>
-                                <td>
                                     <!-- Add this button in your table for each row to trigger the modal -->
-                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal"
-                                        data-bs-target="#editModal<?php echo $data['UserID']; ?>">
+                                    <button type="button" class="btn btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $data['UserID']; ?>">
                                         Edit
                                     </button>
                                     <!-- Modal for editing data -->
-                                    <div class="modal fade" id="editModal<?php echo $data['UserID']; ?>" tabindex="-1"
-                                        aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="editModal<?php echo $data['UserID']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editModalLabel">Edit Data User</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="edit_data.php" method="POST" enctype="multipart/form-data">
-                                                        <input type="hidden" name="UserID"
-                                                            value="<?php echo $data['UserID']; ?>">
+                                                        <input type="hidden" name="UserID" value="<?php echo $data['UserID']; ?>">
                                                         <div class="mb-3">
                                                             <label for="editUsername" class="form-label">Username</label>
-                                                            <input type="text" class="form-control" name="editUsername"
-                                                                value="<?php echo $data['Username']; ?>" required>
+                                                            <input type="text" class="form-control" name="editUsername" value="<?php echo $data['Username']; ?>" required>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="editEmail" class="form-label">Email</label>
-                                                            <input type="text" class="form-control" name="editEmail"
-                                                                value="<?php echo $data['Email']; ?>" required>
+                                                            <input type="text" class="form-control" name="editEmail" value="<?php echo $data['Email']; ?>" required>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="editNama" class="form-label">Nama Lengkap</label>
-                                                            <input type="text" class="form-control" name="editNama"
-                                                                value="<?php echo $data['NamaLengkap']; ?>" required>
+                                                            <input type="text" class="form-control" name="editNama" value="<?php echo $data['NamaLengkap']; ?>" required>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="editAlamat" class="form-label">Alamat</label>
-                                                            <input type="text" class="form-control" name="editAlamat"
-                                                                value="<?php echo $data['Alamat']; ?>" required>
+                                                            <input type="text" class="form-control" name="editAlamat" value="<?php echo $data['Alamat']; ?>" required>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary"
-                                                                name="update_user">Save Changes</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary" name="update_user">Save Changes</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -140,31 +130,25 @@ $next = $halaman + 1;
                                         </div>
                                     </div>
 
-                                    <a href="" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#hapus<?php echo $data['UserID'] ?>">Hapus</a>
-                                    <div class="modal fade" id="hapus<?php echo $data['UserID'] ?>" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus<?php echo $data['UserID'] ?>">Hapus</a>
+                                    <div class="modal fade" id="hapus<?php echo $data['UserID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">
                                                         Hapus data
                                                     </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="edit_data.php" method="POST">
-                                                        <input type="hidden" name="UserID" class="form_control"
-                                                            value="<?php echo $data['UserID'] ?>">
+                                                        <input type="hidden" name="UserID" class="form_control" value="<?php echo $data['UserID'] ?>">
                                                         <p>Apakah yakin ingin menghapus data <br>
                                                             <?php echo $data['Username'] ?>
                                                         </p>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" name="hapus_user"
-                                                                class="btn btn-danger">Hapus</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" name="hapus_user" class="btn btn-danger">Hapus</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -172,11 +156,11 @@ $next = $halaman + 1;
                                         </div>
                                     </div>
                                 </td>
-                            </tr>
-                        <?php }
-                        }
-                        ?>
                     </tr>
+            <?php }
+                        }
+            ?>
+            </tr>
                 </tbody>
             </table>
             <nav>

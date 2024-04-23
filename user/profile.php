@@ -180,34 +180,36 @@ $jml_koleksi = ($total_buku_dikoleksi == 0) ? 0 : $total_buku_dikoleksi;
                             </div>
                         </div>
                     </div>
+                    <?php
+                    // Deklarasi Pagination
+                    $limit = 10;
+                    $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
+                    $offset = ($halaman - 1) * $limit;
+
+                    $previous = ($halaman > 1) ? $halaman - 1 : 1;
+                    $next = $halaman + 1;
+
+                    $queryriwayat = mysqli_query($koneksi, "SELECT
+    rp.PeminjamanID,
+    buku.Judul AS JudulBuku,
+    user.Username AS NamaUser,
+    rp.TanggalPeminjaman,
+    rp.TanggalKembali
+    FROM
+    riwayat rp
+    JOIN
+    buku ON rp.BukuID = buku.BukuID
+    JOIN
+    user ON rp.UserID = user.UserID
+    WHERE rp.UserID = '$userID'
+    ORDER BY TanggalPeminjaman DESC
+    LIMIT $offset, $limit;");
+                    $no = 1;
+                    ?>
+
                     <div class="tab-pane fade" id="borrow-history" role="tabpanel" aria-labelledby="borrow-history-tab">
-                        <?php
-                        // Deklarasi Pagination
-                        $limit = 10;
-                        $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
-                        $offset = ($halaman - 1) * $limit;
-
-                        $previous = ($halaman > 1) ? $halaman - 1 : 1;
-                        $next = $halaman + 1;
-
-                        $queryriwayat = mysqli_query($koneksi, "SELECT
-        rp.PeminjamanID,
-        buku.Judul AS JudulBuku,
-        user.Username AS NamaUser,
-        rp.TanggalPeminjaman,
-        rp.TanggalKembali
-        FROM
-        riwayat rp
-        JOIN
-        buku ON rp.BukuID = buku.BukuID
-        JOIN
-        user ON rp.UserID = user.UserID
-        WHERE rp.UserID = '$userID'
-        ORDER BY TanggalPeminjaman DESC;
-        LIMIT $offset, $limit;");
-                        $no = 1;
-                        if ($queryriwayat && mysqli_num_rows($queryriwayat) > 0) {
-                        ?>
+                        <?php if ($queryriwayat && mysqli_num_rows($queryriwayat) > 0) { ?>
+                            <!-- Borrow history table -->
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -218,20 +220,17 @@ $jml_koleksi = ($total_buku_dikoleksi == 0) ? 0 : $total_buku_dikoleksi;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    while ($data = mysqli_fetch_array($queryriwayat)) {
-                                    ?>
+                                    <?php while ($data = mysqli_fetch_array($queryriwayat)) { ?>
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><?php echo $data['JudulBuku'] ?></td>
                                             <td><?php echo $data['TanggalPeminjaman'] ?></td>
                                             <td><?php echo $data['TanggalKembali'] ?></td>
                                         </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
+                            <!-- Pagination -->
                             <nav>
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item">
@@ -254,17 +253,12 @@ $jml_koleksi = ($total_buku_dikoleksi == 0) ? 0 : $total_buku_dikoleksi;
                                     </li>
                                 </ul>
                             </nav>
-                        <?php
-                        } else {
+                        <?php } else {
                             // Jika tidak ada data, tampilkan pesan "Tidak ada riwayat"
                             echo "<h1 class='mt-4 mb-5'>Tidak ada riwayat</h1>";
-                            ?>
-                            <div class="mb-5">
-                            </div>
-                            <?php
-                        }
-                        ?>
+                        } ?>
                     </div>
+
 
                 </div>
             </div>

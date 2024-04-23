@@ -203,6 +203,7 @@ $jml_koleksi = ($total_buku_dikoleksi == 0) ? 0 : $total_buku_dikoleksi;
         JOIN
         user ON rp.UserID = user.UserID
         WHERE rp.UserID = '$userID'
+        ORDER BY TanggalPeminjaman DESC;
         LIMIT $offset, $limit;");
                         $no = 1;
                         if ($queryriwayat && mysqli_num_rows($queryriwayat) > 0) {

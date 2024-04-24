@@ -27,7 +27,7 @@ $userID = $_SESSION['UserID'];
                         $no = 1;
                         if ($queryriwayat && mysqli_num_rows($queryriwayat) > 0) {
                         ?>
-                            <table class="table">
+                            <table class="table overflow-x-auto">
                                 <thead>
                                     <tr>
                                         <th>No</th>

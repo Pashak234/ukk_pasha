@@ -36,7 +36,7 @@
                                                                         echo '<div class="alert alert-danger" role="alert">Mohon kembalikan buku, Anda akan terkena denda bila melewati waktu pengembalian yang ditentukan.</div>';
                                                                     } else {
                                                                         // Display a notice with the return date
-                                                                        echo '<div class="alert alert-warning" role="alert">Mohon kembalikan buku pada ' . $batasKembali . '</div>';
+                                                                        echo '<div class="alert alert-warning" role="alert">Mohon kembalikan buku sebelum ' . $batasKembali . '</div>';
                                                                     }
                                                                 } elseif ($data['StatusPeminjaman'] == 'dipesan') {
                                                                     // Display a notice if the book is reserved

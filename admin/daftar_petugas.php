@@ -120,7 +120,7 @@ include '../config/koneksi.php';
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <a href="" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#hapus<?php echo $row['PetugasID'] ?>">Hapus</a>
                             <div class="modal fade" id="hapus<?php echo $row['PetugasID'] ?>" tabindex="-1"

@@ -1,10 +1,11 @@
 <?php
 session_start();
 include '../config/koneksi.php';
-if (empty($_SESSION['login'])) {
-  header("location:../index.php");
-  exit();
+// cek login
+if($_SESSION['user_login'] != true){
+    header("location: ../login.php");
 }
+
 
 // Ambil UserID dari sesi yang sedang aktif
 $UserID = $_SESSION['UserID'];

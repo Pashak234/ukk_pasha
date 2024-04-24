@@ -11,12 +11,14 @@ if(isset($_POST['kembalikan'])) {
     $bukuID = $_POST['bukuID'];
 
     // Hapus data peminjaman berdasarkan BukuID yang statusnya telah diupdate menjadi tersedia
-    $updateTanggalQuery = "UPDATE peminjaman SET TanggalPengembalian = current_date() WHERE BukuID = $bukuID";
-    mysqli_query($koneksi, $updateTanggalQuery);
+    // $updateTanggalQuery = "UPDATE peminjaman SET TanggalPengembalian = current_date() WHERE BukuID = $bukuID";
+    // mysqli_query($koneksi, $updateTanggalQuery);
+
+    $tanggalKembali = date('Y-m-d');
 
     // Impor peminjaman ke riwayat peminjaman
     $insertRiwayat = "INSERT INTO riwayat (PeminjamanID, BukuID, UserID, TanggalPeminjaman, TanggalKembali)
-    SELECT PeminjamanID, BukuID, UserID, TanggalPeminjaman, TanggalPengembalian
+    SELECT PeminjamanID, BukuID, UserID, TanggalPeminjaman, NOW() AS TanggalKembali
     FROM peminjaman; -- Specify your source table here
     ";
     mysqli_query($koneksi, $insertRiwayat);

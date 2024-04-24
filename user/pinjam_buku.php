@@ -61,10 +61,10 @@ if (isset($_POST['pinjam'])) {
     $tanggalAmbil = $_POST['tanggalAmbil'];
 
     // Menghitung tanggal pengembalian dengan menambahkan 7 hari dari tanggal pengambilan
-    $tanggalPengembalian = date('Y-m-d', strtotime($tanggalAmbil . ' + 7 days'));
+    $batasPengembalian = date('Y-m-d', strtotime($tanggalAmbil . ' + 7 days'));
 
     // Insert into database
-    $queryInsert = mysqli_query($koneksi, "INSERT INTO peminjaman VALUES ('', '$userID', '$bukuID', '$tanggalPesan', '$tanggalAmbil','$tanggalPengembalian', 'dipesan')");
+    $queryInsert = mysqli_query($koneksi, "INSERT INTO peminjaman VALUES ('', '$userID', '$bukuID', '$tanggalPesan', '$tanggalAmbil','$batasPengembalian', 'dipesan')");
 
     if ($queryInsert) {
         ?>

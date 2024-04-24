@@ -26,7 +26,7 @@ $next = $halaman + 1;
                     <th>Nama Peminjam</th>
                     <th>Judul Buku</th>
                     <th>Tanggal Peminjaman</th>
-                    <th>Tanggal Pengembalian</th>
+                    <th>Batas Waktu Pengembalian</th>
                     <td>Aksi</td>
                 </tr>
             </thead>
@@ -45,7 +45,7 @@ $next = $halaman + 1;
                             <td><?php echo $data['NamaLengkap'] ?></td>
                             <td><?php echo $data['Judul'] ?></td>
                             <td><?php echo $data['TanggalPeminjaman'] ?></td>
-                            <td><?php echo $data['TanggalPengembalian'] ?></td>
+                            <td><?php echo $data['BatasKembali'] ?></td>
                             <td><!-- Button trigger modal -->
                                 <div class="row">
                                     <div class="col-md-6">

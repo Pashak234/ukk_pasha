@@ -24,16 +24,23 @@ $query = mysqli_query($koneksi, "SELECT buku.*, kategoribuku.NamaKategori, ulasa
 if ($query) {
   $data = mysqli_fetch_assoc($query);
 
+  //Check if the ulasan is already in the users
+  $checkQueryUlasan = mysqli_query($koneksi, "SELECT * FROM koleksipribadi WHERE BukuID = '$BukuID' AND UserID = '$UserID'");
+  $alreadyExistsUlasan = mysqli_num_rows($checkQueryUlasan) > 0;
+
+  $buttonTextUlasan = $alreadyExistsUlasan ? "Diulas" : "Ulasan";
+  $buttonClassUlasan = $alreadyExistsUlasan ? "btn-primary disabled" : "btn-outline-primary";
+
+  $buttonAttributesUlasan = $alreadyExistsUlasan ? 'disabled' : '';
+
   // Check if the book is already in the user's collection
-  $checkQuery = mysqli_query($koneksi, "SELECT * FROM koleksipribadi WHERE BukuID = '$BukuID' AND UserID = '$UserID'");
-  $alreadyExists = mysqli_num_rows($checkQuery) > 0;
+  $checkQueryKoleksi = mysqli_query($koneksi, "SELECT * FROM koleksipribadi WHERE BukuID = '$BukuID' AND UserID = '$UserID'");
+  $alreadyExistsKoleksi = mysqli_num_rows($checkQueryKoleksi) > 0;
 
-  // Determine the button style and text based on whether the book is already in the user's collection
-  $buttonText = $alreadyExists ? "Dikoleksi" : "Koleksi";
-  $buttonClass = $alreadyExists ? "btn-primary disabled" : "btn-outline-primary";
+  $buttonTextKoleksi = $alreadyExistsKoleksi ? "Dikoleksi" : "Koleksi";
+  $buttonClassKoleksi = $alreadyExistsKoleksi ? "btn-primary disabled" : "btn-outline-primary";
 
-  // Define the button attributes based on the condition
-  $buttonAttributes = $alreadyExists ? 'disabled' : '';
+  $buttonAttributesKoleksi = $alreadyExistsKoleksi ? 'disabled' : '';
 }
 
 // Query untuk cek rating
@@ -41,11 +48,9 @@ $queryrating = mysqli_query($koneksi, "SELECT Rating FROM ulasanbuku WHERE BukuI
 $totalRatings = 0;
 $numRatings = 0;
 
-// Check if the query was successful
 if ($queryrating) {
-  // Loop through each rating
+
   while ($row = mysqli_fetch_assoc($queryrating)) {
-    // Increment the total ratings and number of ratings
     $totalRatings += $row['Rating'];
     $numRatings++;
   }
@@ -164,11 +169,11 @@ $averageRating = $numRatings > 0 ? round($totalRatings / $numRatings, 1) : 0;
                   </div>
                   <div class="col-sm-6">
                     <div class="d-flex justify-content-center mt-5">
-                    <a href="index.php?page=ulasan&BukuID=<?php echo $data['BukuID']; ?>" class="btn btn-lg btn-outline-info">Beri Ulasan</a>
+                    <a href="index.php?page=ulasan&BukuID=<?php echo $data['BukuID']; ?>" class="btn btn-lg btn-outline-info <?php echo $buttonClassUlasan; ?> <?php echo $buttonAttributesUlasan; ?>"><?php echo $buttonTextUlasan; ?></a>
                     </div>
                     <form class="d-flex justify-content-center mt-2" action="tambah_koleksi.php" method="post">
                       <input type="hidden" name="BukuID" value="<?php echo $BukuID; ?>">
-                      <button type="submit" name="koleksi" class="btn btn-lg <?php echo $buttonClass; ?>" <?php echo $buttonAttributes; ?>><?php echo $buttonText; ?></button>
+                      <button type="submit" name="koleksi" class="btn btn-lg <?php echo $buttonClassKoleksi; ?>" <?php echo $buttonAttributesKoleksi; ?>><?php echo $buttonTextKoleksi; ?></button>
                     </form>
                   </div>
                 </div>

@@ -77,20 +77,20 @@
                     <li>Judul: <?php echo $statusPeminjaman['Judul']; ?></li>
                     <li>Status Peminjaman: <?php echo $statusPeminjaman['StatusPeminjaman']; ?></li>
                     <li>Tanggal Peminjaman: <?php echo $statusPeminjaman['TanggalPeminjaman']; ?></li>
-                    <li>Tanggal Pengembalian: <?php echo $statusPeminjaman['TanggalPengembalian']; ?></li>
+                    <li>Batas Pengembalian: <?php echo $statusPeminjaman['BatasKembali']; ?></li>
                 </ul>
                 <?php
                 // Check if the book is borrowed
                 if ($statusPeminjaman['StatusPeminjaman'] == 'dipinjam') {
                     // Calculate the return date
-                    $tanggalPengembalian = date('Y-m-d', strtotime($statusPeminjaman['TanggalPengembalian']));
+                    $batasPengembalian = date('Y-m-d', strtotime($statusPeminjaman['BatasKembali']));
                     $today = date('Y-m-d');
-                    if ($today > $tanggalPengembalian) {
+                    if ($today > $batasPengembalian) {
                         // Display a warning if the book is overdue
                         echo '<div class="alert alert-danger" role="alert">Mohon kembalikan buku, Anda akan terkena denda bila melewati waktu pengembalian yang ditentukan.</div>';
                     } else {
                         // Display a notice with the return date
-                        echo '<div class="alert alert-warning" role="alert">Mohon kembalikan buku pada ' . $tanggalPengembalian . '</div>';
+                        echo '<div class="alert alert-warning" role="alert">Mohon kembalikan buku pada ' . $batasPengembalian . '</div>';
                     }
                 } elseif ($statusPeminjaman['StatusPeminjaman'] == 'dipesan') {
                     // Display a notice if the book is reserved

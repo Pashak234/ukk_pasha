@@ -2,9 +2,9 @@
 session_start();
 include '../config/koneksi.php';
 
-// Cek apakah user telah Log in
-if (!isset($_SESSION['login']) || ($_SESSION['login'] != 'admin' && $_SESSION['login'] != 'petugas')) {
-    //Redirect ke login page
+// Validasi bahwa admin_login adalah true
+if (!isset($_SESSION['admin_login']) || $_SESSION['admin_login'] !== true) {
+    // Redirect ke halaman login jika tidak valid
     header('location: login.php');
     exit();
 }

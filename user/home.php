@@ -16,7 +16,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
             <div class="col-lg-4 col-md-12">
                 <form class="d-flex me-5" id="search-form">
                     <input class="form-control mx-2" type="text" id="searchInput" name="search" placeholder="Search by Title or Writer">
-                    <button class="btn btn-outline-info" type="button" id="search-button">Search</button>
+                    <!-- <button class="btn btn-outline-info" type="button" id="search-button">Search</button> -->
                 </form>
             </div>
         </div>
@@ -66,7 +66,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                     }
 
                 ?>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mt-4 mb-3">
+                    <div class="col-xxl-2 col-lg-3 col-md-6 col-sm-12 mt-4 mb-3">
                         <div class="card" style="width: 100%">
                             <img style="aspect-ratio: 3/4;" src="../assets/covers/<?php echo $data['CoverBuku']; ?>" class="card-img-top" alt="Book Cover" style="object-fit: cover;">
                             <div class="card-body">

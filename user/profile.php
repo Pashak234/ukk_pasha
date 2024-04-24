@@ -9,8 +9,8 @@ $total_buku_dipinjam = $data['total_buku_dipinjam'];
 $jml_pinjam = ($total_buku_dipinjam == 0) ? 0 : $total_buku_dipinjam;
 
 //hitung jumlah buku yang dikoleksi
-$qjmlpinjam = mysqli_query($koneksi, "SELECT COUNT(*) AS total_buku_dikoleksi FROM koleksipribadi WHERE UserID = '$userID'");
-$data = mysqli_fetch_assoc($qjmlpinjam);
+$qjmlkoleksi = mysqli_query($koneksi, "SELECT COUNT(*) AS total_buku_dikoleksi FROM koleksipribadi WHERE UserID = '$userID'");
+$data = mysqli_fetch_assoc($qjmlkoleksi);
 $total_buku_dikoleksi = $data['total_buku_dikoleksi'];
 $jml_koleksi = ($total_buku_dikoleksi == 0) ? 0 : $total_buku_dikoleksi;
 ?>

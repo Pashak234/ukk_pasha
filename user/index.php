@@ -2,7 +2,7 @@
 session_start();
 include '../config/koneksi.php';
 // cek login
-if(empty($_SESSION['login'])){
+if($_SESSION['user_login'] != true){
     header("location: ../login.php");
 }
 ?>
